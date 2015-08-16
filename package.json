@@ -25,9 +25,7 @@
   "homepage": "https://github.com/danielstjules/toragent#readme",
   "dependencies": {
     "bluebird": "^2.9.34",
-    "co": "^4.6.0",
     "openports": "0.0.1",
-    "request": "^2.60.0",
     "socks5-client": "^1.1.0",
     "tmp": "0.0.27"
   }
