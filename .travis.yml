@@ -3,5 +3,4 @@ node_js:
   - "0.12"
   - "iojs"
 before_install:
-  - brew update
-  - brew install tor'
+  - "sudo apt-get install -y tor"
