@@ -4,7 +4,7 @@
   "description": "Easily create and manage Tor requests",
   "main": "lib/agent.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
@@ -28,5 +28,10 @@
     "openports": "0.0.1",
     "socks5-client": "^1.1.0",
     "tmp": "0.0.27"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5",
+    "request": "^2.60.0"
   }
 }
