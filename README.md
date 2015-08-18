@@ -66,12 +66,12 @@ examples, `agent` refers to an instance of `TorAgent`.
 #### TorAgent.create(verbose, [fn])
 
 Spawns a Tor process listening on a random unused port, and creates an
-agent for use with HTTP(S) requests. Returns a promise that resolves with
-that instance of TorAgent. The optional verbose param will enable console
-output while initializing Tor. Note that since the Tor process is using a
-new DataDirectory with no cached microdescriptors or any other state, it
-bootstrapping can take between 15 - 60s. The resulting child process is
-automatically killed when node exits.
+agent for use with HTTP(S) requests. The optional verbose param will enable
+console output while initializing Tor. Accepts an optional callback,
+otherwise it returns a promise that resolves with an instance of TorAgent.
+Note that since the Tor process is using a new DataDirectory with no cached
+microdescriptors or any other state, bootstrapping can take between 15 - 60s.
+The resulting child process is automatically killed when node exits.
 
 ``` javascript
 TorAgent.create(true).then(function(agent) {
