@@ -42,7 +42,7 @@ var TorAgent = require('toragent');
 var request  = require('request');
 
 function printGoogleHome(fn) {
-  TorAgent.create(function(err, agent) {
+  TorAgent.create(false, function(err, agent) {
     if (err) return fn(err);
 
     request({
@@ -56,4 +56,48 @@ function printGoogleHome(fn) {
     });
   });
 }
+```
+
+## TorAgent
+
+An HTTP Agent for proxying requests through Tor using SOCKS5. In the following
+examples, `agent` refers to an instance of `TorAgent`.
+
+#### TorAgent.create(verbose, [fn])
+
+Spawns a Tor process listening on a random unused port, and creates an
+agent for use with HTTP(S) requests. Returns a promise that resolves with
+that instance of TorAgent. The optional verbose param will enable console
+output while initializing Tor. Note that since the Tor process is using a
+new DataDirectory with no cached microdescriptors or any other state, it
+bootstrapping can take between 15 - 60s. The resulting child process is
+automatically killed when node exits.
+
+``` javascript
+TorAgent.create(true).then(function(agent) {
+  // Spawning Tor
+  // Tor spawned with pid 42776 listening on 55683
+});
+```
+
+#### agent.rotateAddress()
+
+Rotates the IP address used by Tor by sending a SIGHUP. Returns a promise
+that resolves when complete.
+
+``` javascript
+TorAgent.create().then(function(agent) {
+  return agent.rotateAddress();
+});
+```
+
+#### agent.destroy()
+
+Closes all sockets handled by the agent, and closes the Tor process. Returns
+a promise that resolves when the Tor process has closed.
+
+``` javascript
+TorAgent.create().then(function(agent) {
+  return agent.destroy();
+});
 ```
