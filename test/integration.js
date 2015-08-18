@@ -8,8 +8,10 @@ var request  = Promise.promisify(require('request'));
 describe('toragent', function() {
   var agent;
 
+  // Spawning tor can be slow
+  this.timeout(240000);
+
   before(function() {
-    this.timeout(120000);
     return TorAgent.create().then(function(res) {
       agent = res;
     });
@@ -23,7 +25,6 @@ describe('toragent', function() {
   });
 
   it('can be used with request', function() {
-    this.timeout(10000);
     return request({
       url: 'https://www.google.com',
       agent: agent,
@@ -35,7 +36,6 @@ describe('toragent', function() {
 
   it('closes the tor process when calling destroy', function() {
     var pid;
-    this.timeout(120000);
 
     return TorAgent.create().then(function(agent) {
       pid = agent.tor.process.pid;
