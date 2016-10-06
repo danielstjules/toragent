@@ -23,16 +23,14 @@ var TorAgent = require('toragent');
 var Promise  = require('bluebird');
 var request  = Promise.promisify(require('request'));
 
-function printGoogleHome() {
-  return TorAgent.create().then(function(agent) {
-    return request({
-      url: 'https://www.google.com',
-      agent: agent,
-    });
-  }).spread(function(res, body) {
-    console.log(body);
+TorAgent.create().then(function(agent) {
+  return request({
+    url: 'https://www.google.com',
+    agent: agent,
   });
-}
+}).spread(function(res, body) {
+  console.log(body);
+});
 ```
 
 And callbacks too!
@@ -41,21 +39,16 @@ And callbacks too!
 var TorAgent = require('toragent');
 var request  = require('request');
 
-function printGoogleHome(fn) {
-  TorAgent.create(false, function(err, agent) {
-    if (err) return fn(err);
+TorAgent.create(false, function(err, agent) {
+  if (err) return console.log(err);
 
-    request({
-      url: 'https://www.google.com',
-      agent: agent,
-    }, function(err, res, body) {
-      if (err) return fn(err);
-
-      console.log(body);
-      fn();
-    });
+  request({
+    url: 'https://www.google.com',
+    agent: agent,
+  }, function(err, res, body) {
+    console.log(err || body);
   });
-}
+});
 ```
 
 ## TorAgent

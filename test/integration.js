@@ -9,7 +9,7 @@ describe('toragent', function() {
   var agent;
 
   // Spawning tor can be slow
-  this.timeout(240000);
+  this.timeout(360000);
 
   before(function() {
     return TorAgent.create().then(function(res) {
