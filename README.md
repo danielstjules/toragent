@@ -8,7 +8,7 @@ Compatible with `http.request` and libraries like `request`.
 
 ## Installation
 
-Requires Node >= 0.12 or iojs.
+Requires Node >= 4.
 
 ```
 npm install --save toragent
@@ -67,7 +67,7 @@ microdescriptors or any other state, bootstrapping can take between 15 - 60s.
 The resulting child process is automatically killed when node exits.
 
 ``` javascript
-TorAgent.create(true).then(function(agent) {
+TorAgent.create(true).then((agent) => {
   // Spawning Tor
   // Tor spawned with pid 42776 listening on 55683
 });
@@ -79,9 +79,7 @@ Rotates the IP address used by Tor by sending a SIGHUP. Returns a promise
 that resolves when complete.
 
 ``` javascript
-TorAgent.create().then(function(agent) {
-  return agent.rotateAddress();
-});
+TorAgent.create().then(agent => agent.rotateAddress());
 ```
 
 #### agent.destroy()
@@ -90,7 +88,5 @@ Closes all sockets handled by the agent, and closes the Tor process. Returns
 a promise that resolves when the Tor process has closed.
 
 ``` javascript
-TorAgent.create().then(function(agent) {
-  return agent.destroy();
-});
+TorAgent.create().then(agent => agent.destroy());
 ```
