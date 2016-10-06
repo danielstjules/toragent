@@ -23,12 +23,12 @@ var TorAgent = require('toragent');
 var Promise  = require('bluebird');
 var request  = Promise.promisify(require('request'));
 
-TorAgent.create().then(function(agent) {
+TorAgent.create().then((agent) => {
   return request({
     url: 'https://www.google.com',
     agent: agent,
   });
-}).spread(function(res, body) {
+}).spread((res, body) => {
   console.log(body);
 });
 ```
@@ -39,13 +39,13 @@ And callbacks too!
 var TorAgent = require('toragent');
 var request  = require('request');
 
-TorAgent.create(false, function(err, agent) {
+TorAgent.create(false, (err, agent) => {
   if (err) return console.log(err);
 
   request({
     url: 'https://www.google.com',
     agent: agent,
-  }, function(err, res, body) {
+  }, (err, res, body) => {
     console.log(err || body);
   });
 });
